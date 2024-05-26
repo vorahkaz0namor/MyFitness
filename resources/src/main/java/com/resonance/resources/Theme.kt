@@ -1,4 +1,4 @@
-package com.resonance.myfitness.ui.theme
+package com.resonance.resources
 
 import android.app.Activity
 import android.os.Build

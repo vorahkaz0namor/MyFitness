@@ -16,3 +16,4 @@ dependencyResolutionManagement {
 rootProject.name = "My Fitness"
 include(":app")
 include(":core:data")
+include(":resources")

@@ -1,4 +1,4 @@
-package com.resonance.myfitness.ui.theme
+package com.resonance.resources
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

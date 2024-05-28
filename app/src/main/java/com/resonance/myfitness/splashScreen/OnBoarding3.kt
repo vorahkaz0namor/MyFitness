@@ -81,13 +81,15 @@ fun OnBoarding3(navController: NavController) {
             Button(
                 onClick = { navController.navigate("onboarding_4") },
                 modifier = Modifier
-                    .padding(horizontal = 16.dp, vertical = 16.dp)
+                    .padding(horizontal = 12.dp, vertical = 12.dp)
                     .fillMaxWidth()
                     .height(60.dp)
-                    .clip(RoundedCornerShape(2.dp)),
-                colors = ButtonDefaults.buttonColors(TextColorViolet)
+                    .background(
+                        color = TextColorViolet,
+                        shape = RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp, bottomStart = 12.dp, bottomEnd =12.dp)
+                    )
             ) {
-                Text(text = "Далее")
+                Text(text = "Далее", color = Color.White)
             }
         }
     }

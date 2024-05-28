@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -12,12 +13,10 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
@@ -38,6 +37,7 @@ fun OnBoarding2(navController: NavController) {
     ) {
         Column(
             modifier = Modifier.fillMaxSize()
+                .background(Color.White)
         ) {
             Image(
                 painter = painterResource(id = R.drawable.onboarding2_img),
@@ -64,26 +64,29 @@ fun OnBoarding2(navController: NavController) {
                     Text(
                         buildAnnotatedString {
                             withStyle(style = SpanStyle(fontSize = 24.sp, fontWeight = FontWeight.SemiBold)) {
-                                append("Найдите\n тренировку, которая подходит\n именно вам.")
+                                append("Найдите\n тренировку, которая \nподходит именно вам.")
 
                             }
                         },
                         color = Color.Black,
                         fontSize = 18.sp,
-                        textAlign = TextAlign.Center
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.padding(top = 16.dp)
                     )
                 }
             }
-
+            Spacer(modifier = Modifier.height(12.dp))
             SliderWithIndicator(currentPage = 1, modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp)) // Индикатор слайдера
 
+
+            Spacer(modifier = Modifier.height(12.dp))
 
             Button(
                 onClick = { navController.navigate("onboarding_3") },
                 modifier = Modifier
                     .padding(horizontal = 12.dp, vertical = 12.dp)
                     .fillMaxWidth()
-                    .height(60.dp)
+                    .height(56.dp)
                     .background(
                         color = TextColorViolet,
                         shape = RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp, bottomStart = 12.dp, bottomEnd =12.dp)

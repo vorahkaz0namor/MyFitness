@@ -1,4 +1,4 @@
-﻿[versions]
+[versions]
 android-application = "8.2.1"
 android-kotlin = "1.9.0"
 kotlin-compiler-extension = "1.5.2"

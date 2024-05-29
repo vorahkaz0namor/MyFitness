@@ -29,6 +29,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.resonance.myfitness.R
+import com.resonance.myfitness.ui.theme.TextColorGray
 import com.resonance.myfitness.ui.theme.TextColorViolet
 
 @Composable
@@ -37,7 +38,8 @@ fun OnBoarding3(navController: NavController) {
         modifier = Modifier.fillMaxSize()
     ) {
         Column(
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier
+                .fillMaxSize()
                 .background(Color.White)
         ) {
             Image(
@@ -51,7 +53,7 @@ fun OnBoarding3(navController: NavController) {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(100.dp)
+                    .height(90.dp)
                     .background(Color.White)
                     .offset(y = (-16).dp)
             ) {
@@ -64,20 +66,56 @@ fun OnBoarding3(navController: NavController) {
                 ) {
                     Text(
                         buildAnnotatedString {
-                            withStyle(style = SpanStyle(fontSize = 24.sp, fontWeight = FontWeight.SemiBold)) {
-                                append("Тренируйтесь и\n получайте отличные\n результаты.")
-
+                            withStyle(
+                                style = SpanStyle(
+                                    fontSize = 24.sp,
+                                    fontWeight = FontWeight.SemiBold
+                                )
+                            ) {
+                                append("Тренируйтесь и \n получайте отличные \n результаты.")
                             }
                         },
                         color = Color.Black,
                         fontSize = 18.sp,
                         textAlign = TextAlign.Center,
-                        modifier = Modifier.padding(top = 16.dp)
+                        modifier = Modifier.padding(top = 16.dp, bottom = 0.dp)
                     )
                 }
             }
+
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(45.dp)
+                    .background(Color.White),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    buildAnnotatedString {
+                        withStyle(
+                            style = SpanStyle(
+                                fontSize = 14.sp,
+                                fontWeight = FontWeight.Medium,
+                                color = TextColorGray
+                            )
+                        ) {
+                            append("Lorem ipsum dolor sit amet consectetur.\n Enim tellus pellentesque sit non nisi.")
+                        }
+                    },
+                    color = Color.Black,
+                    fontSize = 18.sp,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.padding(top = 0.dp)
+                )
+            }
+
+
             Spacer(modifier = Modifier.height(12.dp))
-            SliderWithIndicator(currentPage = 2, modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp)) // Индикатор слайдера
+            SliderWithIndicator(currentPage = 2, modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp))
+
+
             Spacer(modifier = Modifier.height(12.dp))
 
             Button(
@@ -88,7 +126,12 @@ fun OnBoarding3(navController: NavController) {
                     .height(56.dp)
                     .background(
                         color = TextColorViolet,
-                        shape = RoundedCornerShape(topStart = 12.dp, topEnd = 12.dp, bottomStart = 12.dp, bottomEnd =12.dp)
+                        shape = RoundedCornerShape(
+                            topStart = 12.dp,
+                            topEnd = 12.dp,
+                            bottomStart = 12.dp,
+                            bottomEnd = 12.dp
+                        )
                     ),
                 colors = ButtonDefaults.buttonColors(
                     TextColorViolet

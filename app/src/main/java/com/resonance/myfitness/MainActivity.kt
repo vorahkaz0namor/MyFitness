@@ -10,6 +10,8 @@ import androidx.compose.material3.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.navigation.compose.rememberNavController
+import com.resonance.myfitness.navigation.RootNavGraph
 import com.resonance.resources.MyFitnessTheme
 
 class MainActivity : ComponentActivity() {
@@ -17,17 +19,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MyFitnessTheme {
-                Box (
-                    modifier = Modifier.fillMaxSize(),
-                    contentAlignment = Alignment.TopCenter
-                ) {
-                    Text(text = "Hello, friends!")
-
-                    Image(
-                        painter = painterResource(R.drawable.ic_launcher_foreground),
-                        contentDescription = null
-                    )
-                }
+                RootNavGraph(navController = rememberNavController())
             }
         }
     }

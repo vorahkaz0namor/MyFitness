@@ -1,4 +1,4 @@
-package com.resonance.myfitness.splashScreen
+package com.resonance.myfitness.presentation.view
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

@@ -1,4 +1,4 @@
-package com.resonance.myfitness.splashScreen
+package com.resonance.myfitness.presentation.view
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -32,8 +32,9 @@ import com.resonance.myfitness.R
 import com.resonance.myfitness.ui.theme.TextColorGray
 import com.resonance.myfitness.ui.theme.TextColorViolet
 
+
 @Composable
-fun OnBoarding2(navController: NavController) {
+fun OnBoarding4(navController: NavController) {
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -43,7 +44,7 @@ fun OnBoarding2(navController: NavController) {
                 .background(Color.White)
         ) {
             Image(
-                painter = painterResource(id = R.drawable.onboarding2_img),
+                painter = painterResource(id = R.drawable.onboarding4_img),
                 contentDescription = "Your Image",
                 modifier = Modifier
                     .fillMaxWidth()
@@ -64,22 +65,23 @@ fun OnBoarding2(navController: NavController) {
                         .background(Color.White, shape = RoundedCornerShape(16.dp)),
                     contentAlignment = Alignment.Center
                 ) {
-                    Text(
-                        buildAnnotatedString {
-                            withStyle(
-                                style = SpanStyle(
-                                    fontSize = 24.sp,
-                                    fontWeight = FontWeight.SemiBold
-                                )
-                            ) {
-                                append("Найдите\n тренировку, которая \nподходит именно вам.")
-                            }
-                        },
-                        color = Color.Black,
-                        fontSize = 18.sp,
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier.padding(top = 16.dp, bottom = 0.dp)
-                    )
+                 Text(
+                       buildAnnotatedString {
+                           withStyle(style = SpanStyle(fontSize = 23.sp, fontWeight = FontWeight.SemiBold)) {
+                               append("Давайте заниматься\n спортом и вести здоровый\n образ жизни вместе с ")
+                           }
+                           withStyle(style = SpanStyle(fontSize = 23.sp, fontWeight = FontWeight.SemiBold, color = TextColorViolet)) {
+                               append("DDX")
+                           }
+                           withStyle(style = SpanStyle(fontSize = 23.sp, fontWeight = FontWeight.SemiBold)) {
+                               append("!")
+                           }
+                       },
+                       color = Color.Black,
+                       fontSize = 18.sp,
+                       textAlign = TextAlign.Center,
+                       modifier = Modifier.padding(top = 16.dp)
+                   )
                 }
             }
 
@@ -99,7 +101,7 @@ fun OnBoarding2(navController: NavController) {
                                 color = TextColorGray
                             )
                         ) {
-                            append("Lorem ipsum dolor sit amet consectetur.\n Enim tellus pellentesque sit non nisi.")
+                            append("Давайте подберем упражнения по\n вашим параметрам.")
                         }
                     },
                     color = Color.Black,
@@ -111,42 +113,34 @@ fun OnBoarding2(navController: NavController) {
 
 
             Spacer(modifier = Modifier.height(12.dp))
-            SliderWithIndicator(currentPage = 1, modifier = Modifier
+            SliderWithIndicator(currentPage = 3, modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp))
 
 
-           Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.height(12.dp))
 
-           Button(
-               onClick = { navController.navigate("onboarding_3") },
-               modifier = Modifier
-                   .padding(horizontal = 12.dp, vertical = 12.dp)
-                   .fillMaxWidth()
-                   .height(56.dp)
-                   .background(
-                       color = TextColorViolet,
-                       shape = RoundedCornerShape(
-                           topStart = 12.dp,
-                           topEnd = 12.dp,
-                           bottomStart = 12.dp,
-                           bottomEnd = 12.dp
-                       )
-                   ),
-                       colors = ButtonDefaults.buttonColors(
-                       TextColorViolet
-                       )
-           ) {
-               Text(text = "Далее", color = Color.White)
-           }
+            Button(
+                onClick = { navController.navigate("onboarding_1") },
+                modifier = Modifier
+                    .padding(horizontal = 12.dp, vertical = 12.dp)
+                    .fillMaxWidth()
+                    .height(56.dp)
+                    .background(
+                        color = TextColorViolet,
+                        shape = RoundedCornerShape(
+                            topStart = 12.dp,
+                            topEnd = 12.dp,
+                            bottomStart = 12.dp,
+                            bottomEnd = 12.dp
+                        )
+                    ),
+                colors = ButtonDefaults.buttonColors(
+                    TextColorViolet
+                )
+            ) {
+                Text(text = "Далее", color = Color.White)
+            }
         }
     }
 }
-
-
-
-
-
-
-
-

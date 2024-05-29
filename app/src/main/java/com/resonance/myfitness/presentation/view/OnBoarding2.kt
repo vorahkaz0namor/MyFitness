@@ -1,4 +1,4 @@
-package com.resonance.myfitness.splashScreen
+package com.resonance.myfitness.presentation.view
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -33,7 +33,7 @@ import com.resonance.myfitness.ui.theme.TextColorGray
 import com.resonance.myfitness.ui.theme.TextColorViolet
 
 @Composable
-fun OnBoarding3(navController: NavController) {
+fun OnBoarding2(navController: NavController) {
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -43,7 +43,7 @@ fun OnBoarding3(navController: NavController) {
                 .background(Color.White)
         ) {
             Image(
-                painter = painterResource(id = R.drawable.onboarding3_img),
+                painter = painterResource(id = R.drawable.onboarding2_img),
                 contentDescription = "Your Image",
                 modifier = Modifier
                     .fillMaxWidth()
@@ -72,7 +72,7 @@ fun OnBoarding3(navController: NavController) {
                                     fontWeight = FontWeight.SemiBold
                                 )
                             ) {
-                                append("Тренируйтесь и \n получайте отличные \n результаты.")
+                                append("Найдите\n тренировку, которая \nподходит именно вам.")
                             }
                         },
                         color = Color.Black,
@@ -111,34 +111,42 @@ fun OnBoarding3(navController: NavController) {
 
 
             Spacer(modifier = Modifier.height(12.dp))
-            SliderWithIndicator(currentPage = 2, modifier = Modifier
+            SliderWithIndicator(currentPage = 1, modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp))
 
 
-            Spacer(modifier = Modifier.height(12.dp))
+           Spacer(modifier = Modifier.height(12.dp))
 
-            Button(
-                onClick = { navController.navigate("onboarding_4") },
-                modifier = Modifier
-                    .padding(horizontal = 12.dp, vertical = 12.dp)
-                    .fillMaxWidth()
-                    .height(56.dp)
-                    .background(
-                        color = TextColorViolet,
-                        shape = RoundedCornerShape(
-                            topStart = 12.dp,
-                            topEnd = 12.dp,
-                            bottomStart = 12.dp,
-                            bottomEnd = 12.dp
-                        )
-                    ),
-                colors = ButtonDefaults.buttonColors(
-                    TextColorViolet
-                )
-            ) {
-                Text(text = "Далее", color = Color.White)
-            }
+           Button(
+               onClick = { navController.navigate("onboarding_3") },
+               modifier = Modifier
+                   .padding(horizontal = 12.dp, vertical = 12.dp)
+                   .fillMaxWidth()
+                   .height(56.dp)
+                   .background(
+                       color = TextColorViolet,
+                       shape = RoundedCornerShape(
+                           topStart = 12.dp,
+                           topEnd = 12.dp,
+                           bottomStart = 12.dp,
+                           bottomEnd = 12.dp
+                       )
+                   ),
+                       colors = ButtonDefaults.buttonColors(
+                       TextColorViolet
+                       )
+           ) {
+               Text(text = "Далее", color = Color.White)
+           }
         }
     }
 }
+
+
+
+
+
+
+
+

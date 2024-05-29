@@ -1,4 +1,4 @@
-package com.resonance.myfitness.splashScreen
+package com.resonance.myfitness.presentation.view
 
 import android.annotation.SuppressLint
 import android.content.Context

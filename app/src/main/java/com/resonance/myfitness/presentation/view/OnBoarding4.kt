@@ -54,7 +54,7 @@ fun OnBoarding4(navController: NavController) {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(90.dp)
+                    .height(95.dp)
                     .background(Color.White)
                     .offset(y = (-16).dp)
             ) {

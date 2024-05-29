@@ -29,7 +29,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.resonance.myfitness.R
-import com.resonance.myfitness.presentation.view.SliderWithIndicator
 import com.resonance.myfitness.ui.theme.TextColorGray
 import com.resonance.myfitness.ui.theme.TextColorViolet
 
@@ -54,7 +53,7 @@ fun OnBoarding3(navController: NavController) {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(90.dp)
+                    .height(95.dp)
                     .background(Color.White)
                     .offset(y = (-16).dp)
             ) {

@@ -1,4 +1,4 @@
-package com.resonance.myfitness.presentation.view
+package com.resonance.myfitness.ui.splash
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -17,17 +17,21 @@ import androidx.compose.ui.unit.dp
 import com.resonance.resources.TextColorViolet
 
 @Composable
-fun SliderWithIndicator(currentPage: Int, modifier: Modifier = Modifier) {
+fun SliderWithIndicator(
+    modifier: Modifier = Modifier,
+    currentPageIndex: Int,
+    onboardingItemsIndexes: List<Int>
+) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
     ) {
         Row {
-            Dot(isActive = currentPage == 1)
-            Spacer(modifier = Modifier.width(8.dp))
-            Dot(isActive = currentPage == 2)
-            Spacer(modifier = Modifier.width(8.dp))
-            Dot(isActive = currentPage == 3)
+            onboardingItemsIndexes.map {
+                Dot(isActive = currentPageIndex == it)
+                if (it != onboardingItemsIndexes.lastIndex)
+                    Spacer(modifier = Modifier.width(8.dp))
+            }
         }
     }
 }

@@ -139,7 +139,6 @@ fun OtherOnboardingScreen(
         }
     }
 }
-
 @Composable
 fun OtherOnboardingItem(
     onboardingItem: OtherOnboardingItem,

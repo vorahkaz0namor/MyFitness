@@ -1,10 +1,16 @@
 package com.resonance.myfitness.navigation
 
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
-import com.resonance.myfitness.ui.auth.AuthStubScreen
+import com.resonance.myfitness.ui.auth.WelcomeScreen
+import com.resonance.myfitness.ui.baseviews.StubScreen
 import com.resonance.myfitness.ui.splash.SplashScreenLogic
 
 fun NavGraphBuilder.authNavGraph(rootNavController: NavHostController) {
@@ -21,14 +27,32 @@ fun NavGraphBuilder.authNavGraph(rootNavController: NavHostController) {
                 }
             )
         }
-        composable(route = AuthScreen.Onboarding.route) {
-
-        }
         composable(route = AuthScreen.Welcome.route) {
-            AuthStubScreen()
+            CrutchingAdapt {
+                WelcomeScreen(
+                    navigateToCreate = {
+                        rootNavController.navigate(AuthScreen.CreateAccount.route)
+                    },
+                    navigateToMain = {
+                        rootNavController.navigate(AuthScreen.Main.route)
+                    }
+                )
+            }
+        }
+        composable(route = AuthScreen.CreateAccount.route) {
+            StubScreen(caption = AuthScreen.CREATE_ACCOUNT_SCREEN)
         }
         composable(route = AuthScreen.Login.route) {
-
+            StubScreen(caption = AuthScreen.LOGIN_SCREEN)
+        }
+        composable(route = AuthScreen.Confirm.route) {
+            StubScreen(caption = AuthScreen.CONFIRM_SCREEN)
+        }
+        composable(route = AuthScreen.Poll.route) {
+            StubScreen(caption = AuthScreen.POLL_SCREEN)
+        }
+        composable(route = AuthScreen.Main.route) {
+            StubScreen(caption = AuthScreen.MAIN_SCREEN)
         }
     }
 }
@@ -36,12 +60,29 @@ fun NavGraphBuilder.authNavGraph(rootNavController: NavHostController) {
 sealed class AuthScreen(val route: String) {
     companion object {
         const val SPLASH_SCREEN = "splash_screen"
-        const val ONBOARDING_SCREEN = "onboarding_screen"
         const val WELCOME_SCREEN = "welcome_screen"
+        const val CREATE_ACCOUNT_SCREEN = "create_account_screen"
         const val LOGIN_SCREEN = "login_screen"
+        const val CONFIRM_SCREEN = "confirm_screen"
+        const val POLL_SCREEN = "poll_screen"
+        const val MAIN_SCREEN = "main_screen"
     }
     data object Splash: AuthScreen(SPLASH_SCREEN)
-    data object Onboarding: AuthScreen(ONBOARDING_SCREEN)
     data object Welcome: AuthScreen(WELCOME_SCREEN)
+    data object CreateAccount: AuthScreen(CREATE_ACCOUNT_SCREEN)
     data object Login: AuthScreen(LOGIN_SCREEN)
+    data object Confirm: AuthScreen(CONFIRM_SCREEN)
+    data object Poll: AuthScreen(POLL_SCREEN)
+    data object Main: AuthScreen(MAIN_SCREEN)
+}
+
+@Composable
+fun CrutchingAdapt(composable: @Composable () -> Unit) {
+    Column(
+        /**
+         * TODO: When UI adaptation would be resolved
+         * TODO: then should kill this CRUTCH
+         */
+        modifier = Modifier.verticalScroll(rememberScrollState())
+    ) { composable() }
 }

@@ -1,7 +1,10 @@
 package com.resonance.data.model
 
-data class AuthRequest(
+data class LoginRequest(
     val email: String? = null,
+)
+
+data class ConfirmRequest(
     val password: String? = null,
 )
 

@@ -16,3 +16,5 @@ const val WelcomeScreenMainCaption = "Создайте аккаунт\nили в
 const val WelcomeScreenAdditionalCaption = "Создайте учетную запись, чтобы\nполучить полный доступ"
 const val CreateAccountButtonCaption = "Создать аккаунт"
 const val LaterButtonCaption = "Позже"
+const val LoginScreenMainCaption = "Электронная почта"
+const val LoginScreenAdditionalCaption = "Нам нужен адрес электронной почты.\nМы определенно не будем отправлять\nспам-сообщения."

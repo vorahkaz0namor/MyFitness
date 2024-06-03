@@ -1,8 +1,9 @@
 package com.resonance.myfitness.ui.auth
 
+import androidx.compose.runtime.Composable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.resonance.data.model.AuthRequest
+import com.resonance.data.model.LoginRequest
 import com.resonance.myfitness.application.App
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -13,12 +14,14 @@ class AuthViewModel : ViewModel() {
     private val _authState = MutableStateFlow<AuthState?>(null)
     val authState: StateFlow<AuthState?>
         get() = _authState.asStateFlow()
+    val isAuthorized: Boolean
+        get() = true
 
     init {
         App.getAppComponent().inject(this)
     }
 
-    fun login(authRequest: AuthRequest) {
+    fun login(loginRequest: LoginRequest) {
         viewModelScope.launch {
             _authState.value = AuthState.Loading
             // onSuccess

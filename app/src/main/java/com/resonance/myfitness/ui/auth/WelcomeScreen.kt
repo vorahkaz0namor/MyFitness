@@ -39,7 +39,7 @@ fun WelcomeScreen(
         ) {
             BaseContainerWithImage(
                 item =
-                    ImageWithCaptionItem.welcomeScreenItem()
+                ImageWithCaptionItem.welcomeScreenItem()
             )
         }
 

@@ -6,12 +6,17 @@ import androidx.navigation.compose.NavHost
 
 @Composable
 fun RootNavGraph(navController: NavHostController) {
-    NavHost(
-        navController = navController,
-        route = Graph.ROOT,
-        startDestination = Graph.AUTH
-    ) {
-        authNavGraph(rootNavController = navController)
+    navController.WithAuthViewModel { authViewModel ->
+        NavHost(
+            navController = navController,
+            route = Graph.ROOT,
+            startDestination = Graph.AUTH
+        ) {
+            authNavGraph(
+                rootNavController = navController,
+                authViewModel = authViewModel
+            )
+        }
     }
 }
 

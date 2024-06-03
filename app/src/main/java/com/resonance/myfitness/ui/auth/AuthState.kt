@@ -11,7 +11,7 @@ sealed interface AuthState {
 @Composable
 fun AuthState?.StateHandler(
     onDismissRequest: () -> Unit,
-
+    composeAfterSuccess: @Composable () -> Unit
 ) {
 
 }

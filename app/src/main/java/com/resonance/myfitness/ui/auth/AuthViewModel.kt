@@ -1,6 +1,5 @@
 package com.resonance.myfitness.ui.auth
 
-import androidx.compose.runtime.Composable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.resonance.data.model.LoginRequest

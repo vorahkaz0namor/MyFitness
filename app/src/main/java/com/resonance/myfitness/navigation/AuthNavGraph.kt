@@ -18,10 +18,7 @@ import com.resonance.myfitness.ui.auth.WelcomeScreen
 import com.resonance.myfitness.ui.baseviews.StubScreen
 import com.resonance.myfitness.ui.splash.SplashScreenLogic
 
-fun NavGraphBuilder.authNavGraph(
-    rootNavController: NavHostController,
-    authViewModel: AuthViewModel
-) {
+fun NavGraphBuilder.authNavGraph(rootNavController: NavHostController) {
             navigation(
                 route = Graph.AUTH,
                 startDestination = AuthScreen.Splash.route
@@ -48,8 +45,10 @@ fun NavGraphBuilder.authNavGraph(
                     }
                 }
                 composable(route = AuthScreen.Login.route) {
-                    LoginScreen { loginRequest ->
-                        authViewModel.login(loginRequest)
+                    rootNavController.WithAuthViewModel { authViewModel ->
+                        LoginScreen { loginRequest ->
+                            authViewModel.login(loginRequest)
+                        }
                     }
                 }
                 composable(route = AuthScreen.Confirm.route) {

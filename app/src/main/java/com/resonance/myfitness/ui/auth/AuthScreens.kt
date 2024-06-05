@@ -40,13 +40,6 @@ fun LoginScreen(login: (LoginRequest) -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-//            .background(
-//                color = Color.White,
-//                shape = RoundedCornerShape(
-//                    topStart = 16.dp,
-//                    topEnd = 16.dp
-//                )
-//            )
     ) {
         Box(
             modifier = Modifier.fillMaxWidth(),

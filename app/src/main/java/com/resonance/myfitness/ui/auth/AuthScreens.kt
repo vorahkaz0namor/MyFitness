@@ -143,69 +143,76 @@ fun LoginScreen(login: (LoginRequest) -> Unit) {
 
                 Row(
                     modifier = Modifier
-                        .padding(start = 15.dp, end = 15.dp)
-                        .fillMaxWidth(),
+                        .padding(start = 15.dp, end = 15.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Checkbox(
-                        checked = false,
-                        onCheckedChange = { isChecked ->
-
-                        },
-                        modifier = Modifier.size(16.dp)
-                    )
-
-                    Spacer(modifier = Modifier.width(15.dp))
-                    val wordsPrivacyPolicy = PrivacyPolicy.split(" ")
-                    val wordsPrivacyPolicySecond = PrivacyPolicySecond.split(" ")
-
-                    Column(
-                        modifier = Modifier,
-                        verticalArrangement = Arrangement.spacedBy(8.dp),
-                        horizontalAlignment = Alignment.Start
+                    Row(
+                        modifier = Modifier
+                            .padding(end = 15.dp)
+                            .weight(1f, fill = true),
+                        verticalAlignment = Alignment.Top
                     ) {
-                        Row(
-                            modifier = Modifier,
-                            horizontalArrangement = Arrangement.spacedBy(8.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            wordsPrivacyPolicy.forEach { word ->
-                                Text(
-                                    text = word,
-                                    fontSize = 10.sp,
-                                    textDecoration = if (word.equals(
-                                            "Политику",
-                                            ignoreCase = true
-                                        )
-                                    ) TextDecoration.Underline else null,
-                                    color = TextPrivacyPolicy,
-                                    textAlign = TextAlign.Start,
-                                    modifier = Modifier
-                                )
-                            }
-                        }
+                        Checkbox(
+                            checked = false,
+                            onCheckedChange = { isChecked ->
 
-                        Row(
-                            modifier = Modifier,
-                            horizontalArrangement = Arrangement.spacedBy(8.dp),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            wordsPrivacyPolicySecond.forEach { word ->
-                                Text(
-                                    text = word,
-                                    fontSize = 10.sp,
-                                    textDecoration = if (word.equals(
-                                            "и",
-                                            ignoreCase = true
-                                        )
-                                    ) null else TextDecoration.Underline,
-                                    color = TextPrivacyPolicy,
-                                    textAlign = TextAlign.Start,
-                                    modifier = Modifier
-                                )
-                            }
-                        }
+                            },
+                            modifier = Modifier.size(16.dp)
 
+                        )
+                        Spacer(modifier = Modifier.height(20.dp))
+                        Spacer(modifier = Modifier.width(15.dp))
+                        val wordsPrivacyPolicy = PrivacyPolicy.split(" ")
+                        val wordsPrivacyPolicySecond = PrivacyPolicySecond.split(" ")
+
+                        Column(
+                            modifier = Modifier,
+                            verticalArrangement = Arrangement.spacedBy(4.dp),
+                            horizontalAlignment = Alignment.Start
+                        ) {
+                            Row(
+                                modifier = Modifier,
+                                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                wordsPrivacyPolicy.forEach { word ->
+                                    Text(
+                                        text = word,
+                                        fontSize = 10.sp,
+                                        textDecoration = if (word.equals(
+                                                "Политику",
+                                                ignoreCase = true
+                                            )
+                                        ) TextDecoration.Underline else null,
+                                        color = TextPrivacyPolicy,
+                                        textAlign = TextAlign.Start,
+                                        modifier = Modifier
+                                    )
+                                }
+                            }
+
+                            Row(
+                                modifier = Modifier,
+                                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                wordsPrivacyPolicySecond.forEach { word ->
+                                    Text(
+                                        text = word,
+                                        fontSize = 10.sp,
+                                        textDecoration = if (word.equals(
+                                                "и",
+                                                ignoreCase = true
+                                            )
+                                        ) null else TextDecoration.Underline,
+                                        color = TextPrivacyPolicy,
+                                        textAlign = TextAlign.Start,
+                                        modifier = Modifier
+                                    )
+                                }
+                            }
+
+                        }
                     }
                 }
             }

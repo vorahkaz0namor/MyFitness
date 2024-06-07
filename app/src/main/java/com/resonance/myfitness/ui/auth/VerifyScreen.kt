@@ -1,8 +1,5 @@
 package com.resonance.myfitness.ui.auth
 
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -17,14 +14,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
-import androidx.compose.material3.Checkbox
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -32,46 +28,38 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.resonance.data.model.LoginRequest
-import com.resonance.myfitness.R
 import com.resonance.resources.ConfirmTheEmailAddress
 import com.resonance.resources.CreateAnAccount
-import com.resonance.resources.Email
 import com.resonance.resources.ItWillBeUpdated
-import com.resonance.resources.LogInAnonymously
-import com.resonance.resources.LoginScreenAdditionalCaption
-import com.resonance.resources.LoginScreenMainCaption
-import com.resonance.resources.Next
 import com.resonance.resources.PleaseOpenTheMailbox
-import com.resonance.resources.PrivacyPolicy
-import com.resonance.resources.PrivacyPolicySecond
 import com.resonance.resources.Resend
-import com.resonance.resources.TextBorderStroke
+import com.resonance.resources.Seconds
+import com.resonance.resources.TextButtonColor
 import com.resonance.resources.TextColorGray
-import com.resonance.resources.TextOutlinedTextField
-import com.resonance.resources.TextPrivacyPolicy
+import com.resonance.resources.TextColorViolet
+import kotlin.concurrent.fixedRateTimer
 
 @Preview(showBackground = true)
 @Composable
 fun VerifyScreenPreview() {
-    VerifyScreen(login = {})
+    VerifyScreen()
 
 }
 
 
 @Composable
-fun VerifyScreen(login: (LoginRequest) -> Unit) {
-    var emailText by remember { mutableStateOf(TextFieldValue()) }
+fun VerifyScreen() {
+    val textStates = remember { List(5) { mutableStateOf(TextFieldValue()) } }
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -101,12 +89,18 @@ fun VerifyScreen(login: (LoginRequest) -> Unit) {
                     textAlign = TextAlign.Center,
                 )
                 Spacer(modifier = Modifier.height(40.dp))
-                Box(
-                    contentAlignment = Alignment.Center
+
+                Row(
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.fillMaxWidth()
                 ) {
-                    // сюда рисуем квадраты
-                    SquareWithNumberInput()
+                    MultipleBasicTextFields(textStates) { index, newTextFieldValue ->
+                        textStates[index].value = newTextFieldValue
+                    }
                 }
+
+
 
                 Spacer(modifier = Modifier.height(15.dp))
 
@@ -124,27 +118,21 @@ fun VerifyScreen(login: (LoginRequest) -> Unit) {
                         horizontalArrangement = Arrangement.spacedBy(8.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Text(
-                            text = ItWillBeUpdated,
-                            fontSize = 14.sp,
-                            fontWeight = FontWeight.Medium,
-                            color = TextColorGray,
-                            textAlign = TextAlign.Center,
-                        )
+                        CounterText()
                     }
 
 
 
-                Row(
+                    Row(
                         modifier = Modifier,
                         horizontalArrangement = Arrangement.spacedBy(8.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
                             text = Resend,
-                            fontSize = 14.sp,
+                            fontSize = 16.sp,
                             fontWeight = FontWeight.Medium,
-                            color = TextColorGray,
+                            color = TextButtonColor,
                             textAlign = TextAlign.Center,
                         )
                     }
@@ -182,37 +170,84 @@ fun VerifyScreen(login: (LoginRequest) -> Unit) {
 }
 
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SquareWithNumberInput() {
-    var numbers by remember { mutableStateOf(List(5) { "" }) }
-
-    Row(
-        modifier = Modifier.fillMaxWidth(),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceEvenly
-    ) {
-        for (i in 0 until 5) {
-            TextField(
-                value = numbers[i],
-                onValueChange = { newValue ->
-                    numbers = numbers.toMutableList().also { it[i] = newValue }
-                },
-                modifier = Modifier
-                    .background(Color.White)
-                    .padding(8.dp)
-                    .size(50.dp)
-                    .border(
-                        BorderStroke(1.dp, TextPrivacyPolicy),
-                        shape = RoundedCornerShape(16.dp)
-                    ),
-                textStyle = TextStyle(color = Color.Black),
-                placeholder = { Text("") }
+fun MultipleBasicTextFields(
+    textStates: List<MutableState<TextFieldValue>>,
+    onValueChange: (Int, TextFieldValue) -> Unit
+) {
+    textStates.forEachIndexed { index, state ->
+        Box(
+            modifier = Modifier
+                .size(50.dp)
+                .clip(shape = RoundedCornerShape(size = 14.dp))
+                .clipToBounds()
+                .border(1.dp, Color.Black, RoundedCornerShape(size = 14.dp)),
+            contentAlignment = Alignment.Center
+        ) {
+            BasicTextField(
+                value = state.value,
+                onValueChange = { onValueChange(index, TextFieldValue(it.text.take(1))) },
+                textStyle = TextStyle(
+                    color = Color.Black,
+                    textAlign = TextAlign.Center,
+                    fontSize = 20.sp
+                ),
+                modifier = Modifier.padding(8.dp),
+                singleLine = true,
+                keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number)
             )
         }
+        Spacer(modifier = Modifier.width(3.dp))
     }
 }
 
+@Composable
+fun CounterText() {
+    var count by remember { mutableStateOf(53) }
+
+    DisposableEffect(Unit) {
+        val timer = fixedRateTimer(period = 1000) {
+            count--
+            if (count == 0) {
+                cancel()
+            }
+        }
+
+        onDispose {
+            timer.cancel()
+        }
+    }
+
+    Row(
+        modifier = Modifier,
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(
+            text = ItWillBeUpdated,
+            fontSize = 16.sp,
+            fontWeight = FontWeight.Medium,
+            color = TextButtonColor,
+            textAlign = TextAlign.Center,
+        )
+
+        Text(
+            text = count.toString(),
+            fontSize = 16.sp,
+            fontWeight = FontWeight.Medium,
+            color = TextColorViolet,
+            textAlign = TextAlign.Center,
+        )
+
+        Text(
+            text = Seconds,
+            fontSize = 16.sp,
+            fontWeight = FontWeight.Medium,
+            color = TextButtonColor,
+            textAlign = TextAlign.Center,
+        )
+    }
+}
 
 
 

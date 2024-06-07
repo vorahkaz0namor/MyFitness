@@ -1,6 +1,5 @@
 package com.resonance.myfitness.di
 
-import androidx.lifecycle.ViewModel
 import com.resonance.myfitness.application.App
 import com.resonance.myfitness.ui.auth.AuthViewModel
 import dagger.BindsInstance

@@ -9,8 +9,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -30,9 +28,9 @@ import androidx.compose.ui.unit.sp
 import com.resonance.myfitness.navigation.CrutchingAdapt
 import com.resonance.resources.DDXAcronym
 import com.resonance.resources.R
-import com.resonance.resources.TextColorViolet
 import com.resonance.resources.SplashScreenIconDescription
 import com.resonance.resources.SplashScreenRightPartText
+import com.resonance.resources.TextColorViolet
 import kotlinx.coroutines.delay
 
 @Preview(showBackground = true)

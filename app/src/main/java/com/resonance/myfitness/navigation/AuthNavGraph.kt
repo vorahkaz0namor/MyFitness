@@ -36,7 +36,9 @@ fun NavGraphBuilder.authNavGraph(rootNavController: NavHostController) {
                     CrutchingAdapt {
                         WelcomeScreen(
                             navigateToCreate = {
-                                rootNavController.navigate(AuthScreen.Login.route)
+//                                rootNavController.navigate(AuthScreen.Login.route)
+                                // TODO: Temporary navigation to demonstrate PollScreens
+                                rootNavController.navigate(AuthScreen.Poll.route)
                             },
                             navigateToMain = {
                                 rootNavController.navigate(AuthScreen.Main.route)
@@ -55,8 +57,7 @@ fun NavGraphBuilder.authNavGraph(rootNavController: NavHostController) {
                     StubScreen(caption = AuthScreen.CONFIRM_SCREEN)
                 }
                 composable(route = AuthScreen.Poll.route) {
-                    // TODO: Add nested navigation for PollCase
-                    StubScreen(caption = AuthScreen.POLL_SCREEN)
+                    CrutchingAdapt { PollNavHost() }
                 }
                 composable(route = AuthScreen.Main.route) {
                     // TODO: Add nested navigation for MainCase

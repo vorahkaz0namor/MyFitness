@@ -1,6 +1,8 @@
 package com.resonance.myfitness.ui.splash
 
 import androidx.annotation.DrawableRes
+import com.resonance.resources.FifthPollItemAdditionalCaption
+import com.resonance.resources.FifthPollItemMainCaption
 import com.resonance.resources.FirstPollItemAdditionalCaption
 import com.resonance.resources.FirstPollItemMainCaption
 import com.resonance.resources.ForthPollItemAdditionalCaption
@@ -13,6 +15,8 @@ import com.resonance.resources.OtherOnboardingThirdCaptionTwo
 import com.resonance.resources.R
 import com.resonance.resources.SecondPollItemAdditionalCaption
 import com.resonance.resources.SecondPollItemMainCaption
+import com.resonance.resources.SixthPollItemAdditionalCaption
+import com.resonance.resources.SixthPollItemMainCaption
 import com.resonance.resources.ThirdPollItemAdditionalCaption
 import com.resonance.resources.ThirdPollItemMainCaption
 import com.resonance.resources.WelcomeScreenAdditionalCaption
@@ -69,6 +73,19 @@ data class ImageWithCaptionItem(
                 image = R.drawable.ic_dumbbell,
                 mainCaption = ForthPollItemMainCaption,
                 additionalCaption = ForthPollItemAdditionalCaption
+            ),
+        )
+
+        fun secondPollScreenItems() = listOf(
+            ImageWithCaptionItem(
+                image = R.drawable.ic_to_wide_limits_48,
+                mainCaption = FifthPollItemMainCaption,
+                additionalCaption = FifthPollItemAdditionalCaption
+            ),
+            ImageWithCaptionItem(
+                image = R.drawable.ic_pleasure_from_training_48,
+                mainCaption = SixthPollItemMainCaption,
+                additionalCaption = SixthPollItemAdditionalCaption
             ),
         )
     }

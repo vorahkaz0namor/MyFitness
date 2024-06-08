@@ -22,6 +22,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
+import androidx.compose.material3.CheckboxColors
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -47,11 +48,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.resonance.data.model.LoginRequest
 import com.resonance.myfitness.R
+import com.resonance.myfitness.ui.baseviews.BaseMainButton
 import com.resonance.resources.Email
 import com.resonance.resources.LogInAnonymously
 import com.resonance.resources.LoginScreenAdditionalCaption
 import com.resonance.resources.LoginScreenMainCaption
-import com.resonance.resources.Next
+import com.resonance.resources.NextButtonCaption
 import com.resonance.resources.PrivacyPolicy
 import com.resonance.resources.PrivacyPolicySecond
 import com.resonance.resources.TextBorderStroke
@@ -68,10 +70,19 @@ fun LoginScreenPreview() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginScreen(login: (LoginRequest) -> Unit) {
+fun LoginScreen(
+    login: (LoginRequest) -> Unit = { LoginRequest() },
+    navigateToVerify: () -> Unit = {}
+) {
     var emailText by remember { mutableStateOf(TextFieldValue()) }
+    var isAgreeWithPolicy by remember {
+        mutableStateOf(false)
+    }
+
     Column(
-        modifier = Modifier.verticalScroll(rememberScrollState()).fillMaxSize()
+        modifier = Modifier
+            .verticalScroll(rememberScrollState())
+            .fillMaxSize()
     ) {
         Box(
             modifier = Modifier
@@ -158,12 +169,11 @@ fun LoginScreen(login: (LoginRequest) -> Unit) {
                         verticalAlignment = Alignment.Top
                     ) {
                         Checkbox(
-                            checked = false,
+                            checked = isAgreeWithPolicy,
                             onCheckedChange = { isChecked ->
-
+                                isAgreeWithPolicy = !isAgreeWithPolicy
                             },
                             modifier = Modifier.size(16.dp)
-
                         )
                         Spacer(modifier = Modifier.height(20.dp))
                         Spacer(modifier = Modifier.width(15.dp))
@@ -235,16 +245,11 @@ fun LoginScreen(login: (LoginRequest) -> Unit) {
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier.align(Alignment.TopCenter)
             ) {
-                Button(
-                    onClick = { /* Действие при нажатии на кнопку */ },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(56.dp)
-                        .padding(horizontal = 15.dp),
-                    shape = RoundedCornerShape(size = 12.dp)
-                ) {
-                    Text(text = Next, style = TextStyle(fontSize = 16.sp))
-                }
+                BaseMainButton(
+                    modifier = Modifier.padding(horizontal = 15.dp),
+                    caption = NextButtonCaption,
+                    enabled = isAgreeWithPolicy
+                ) { navigateToVerify() }
 
                 Text(
                     text = LogInAnonymously, style = TextStyle(fontSize = 16.sp),

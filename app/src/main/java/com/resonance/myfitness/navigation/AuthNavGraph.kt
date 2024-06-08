@@ -14,6 +14,7 @@ import androidx.navigation.navigation
 import com.resonance.myfitness.ui.auth.AuthViewModel
 import com.resonance.myfitness.ui.auth.LoginScreen
 import com.resonance.myfitness.ui.auth.StateHandler
+import com.resonance.myfitness.ui.auth.VerifyScreen
 import com.resonance.myfitness.ui.auth.WelcomeScreen
 import com.resonance.myfitness.ui.baseviews.StubScreen
 import com.resonance.myfitness.ui.splash.SplashScreenLogic
@@ -36,9 +37,7 @@ fun NavGraphBuilder.authNavGraph(rootNavController: NavHostController) {
                     CrutchingAdapt {
                         WelcomeScreen(
                             navigateToCreate = {
-//                                rootNavController.navigate(AuthScreen.Login.route)
-                                // TODO: Temporary navigation to demonstrate PollScreens
-                                rootNavController.navigate(AuthScreen.Poll.route)
+                                rootNavController.navigate(AuthScreen.Login.route)
                             },
                             navigateToMain = {
                                 rootNavController.navigate(AuthScreen.Main.route)
@@ -47,14 +46,14 @@ fun NavGraphBuilder.authNavGraph(rootNavController: NavHostController) {
                     }
                 }
                 composable(route = AuthScreen.Login.route) {
-                    rootNavController.WithAuthViewModel { authViewModel ->
-                        LoginScreen { loginRequest ->
-                            authViewModel.login(loginRequest)
-                        }
+                    LoginScreen {
+                        rootNavController.navigate(AuthScreen.Verify.route)
                     }
                 }
-                composable(route = AuthScreen.Confirm.route) {
-                    StubScreen(caption = AuthScreen.CONFIRM_SCREEN)
+                composable(route = AuthScreen.Verify.route) {
+                    VerifyScreen {
+                        rootNavController.navigate(AuthScreen.Poll.route)
+                    }
                 }
                 composable(route = AuthScreen.Poll.route) {
                     CrutchingAdapt { PollNavHost() }
@@ -71,14 +70,14 @@ sealed class AuthScreen(val route: String) {
         const val SPLASH_SCREEN = "splash_screen"
         const val WELCOME_SCREEN = "welcome_screen"
         const val LOGIN_SCREEN = "login_screen"
-        const val CONFIRM_SCREEN = "confirm_screen"
+        const val VERIFY_SCREEN = "confirm_screen"
         const val POLL_SCREEN = "poll_screen"
         const val MAIN_SCREEN = "main_screen"
     }
     data object Splash: AuthScreen(SPLASH_SCREEN)
     data object Welcome: AuthScreen(WELCOME_SCREEN)
     data object Login: AuthScreen(LOGIN_SCREEN)
-    data object Confirm: AuthScreen(CONFIRM_SCREEN)
+    data object Verify: AuthScreen(VERIFY_SCREEN)
     data object Poll: AuthScreen(POLL_SCREEN)
     data object Main: AuthScreen(MAIN_SCREEN)
 }

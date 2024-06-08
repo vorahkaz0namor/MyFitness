@@ -40,8 +40,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.resonance.myfitness.ui.baseviews.BaseMainButton
 import com.resonance.resources.ConfirmTheEmailAddress
-import com.resonance.resources.CreateAnAccount
+import com.resonance.resources.CreateAccountButtonCaption
 import com.resonance.resources.ItWillBeUpdated
 import com.resonance.resources.PleaseOpenTheMailbox
 import com.resonance.resources.Resend
@@ -59,10 +60,14 @@ fun VerifyScreenPreview() {
 }
 
 @Composable
-fun VerifyScreen() {
+fun VerifyScreen(
+    navigateToPoll: () -> Unit = {}
+) {
     val textStates = remember { List(5) { mutableStateOf(TextFieldValue()) } }
     Column(
-        modifier = Modifier.verticalScroll(rememberScrollState()).fillMaxSize()
+        modifier = Modifier
+            .verticalScroll(rememberScrollState())
+            .fillMaxSize()
     ) {
         Box(
             modifier = Modifier
@@ -155,16 +160,10 @@ fun VerifyScreen() {
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier.align(Alignment.TopCenter)
             ) {
-                Button(
-                    onClick = { /* Действие при нажатии на кнопку */ },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(56.dp)
-                        .padding(horizontal = 15.dp),
-                    shape = RoundedCornerShape(size = 12.dp)
-                ) {
-                    Text(text = CreateAnAccount, style = TextStyle(fontSize = 16.sp))
-                }
+                BaseMainButton(
+                    modifier = Modifier.padding(horizontal = 15.dp),
+                    caption = CreateAccountButtonCaption,
+                ) { navigateToPoll() }
             }
         }
     }
